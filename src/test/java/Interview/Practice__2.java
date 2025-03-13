@@ -23,8 +23,8 @@ import java.util.Scanner;
 
 import org.apache.xmlbeans.impl.xb.xsdschema.Facet;
 
-import com.google.common.base.CaseFormat;
-import com.mysql.cj.mysqlx.protobuf.MysqlxDatatypes.Array;
+//import com.google.common.base.CaseFormat;
+//import com.mysql.cj.mysqlx.protobuf.MysqlxDatatypes.Array;
 
 
 public class Practice__2 

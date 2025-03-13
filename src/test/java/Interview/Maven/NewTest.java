@@ -11,6 +11,7 @@ import java.util.concurrent.TimeUnit;
 
 import javax.net.ssl.HttpsURLConnection;
 
+import org.apache.commons.logging.Log;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
@@ -76,17 +77,23 @@ public class NewTest {
 	  for(WebElement item:links) {
 		  String url = item.getAttribute("href");
 		  if(url != null && !url.isEmpty()) {
-			  HttpsURLConnection connection = (HttpsURLConnection) (new URL(url).openConnection());
-			  connection.setRequestMethod("HEAD");
-			  connection.connect();
-			  int ResponseCode = connection.getResponseCode();
-			  if (ResponseCode >= 200 && ResponseCode < 300) {
-				  System.out.println(url+" is a valid link");
-			  }else if (ResponseCode >= 300 && ResponseCode < 400) {
-				  System.out.println(url+" is redirected");
-			  }else {
-				  System.out.println(url+" is broken link");
+			  try {
+				  HttpsURLConnection connection = (HttpsURLConnection) (new URL(url).openConnection());
+				  connection.setRequestMethod("HEAD");
+				  connection.connect();
+				  int ResponseCode = connection.getResponseCode();
+				  if (ResponseCode >= 200 && ResponseCode < 300) {
+					  System.out.println(url+" is a valid link");
+				  }else if (ResponseCode >= 300 && ResponseCode < 400) {
+					  System.out.println(url+" is fine or redirected");
+				  }else {
+					  System.out.println(url+" is broken link");
+				  }
+			  }catch (MalformedURLException e){
+				  System.out.println(e);
+				  break;
 			  }
+
 		  }
 		  
 	  }

@@ -1,8 +1,11 @@
-import java.awt.Robot;
+package Interview;
+
+import java.awt.*;
 import java.awt.datatransfer.StringSelection;
 import java.awt.event.KeyEvent;
 import java.io.IOException;
 import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
 import java.util.List;
@@ -18,7 +21,7 @@ public class NewTest {
 	public static WebDriver driver;
 	 
   @Test
-  public void f() {
+  public void f() throws IOException, AWTException {
 	  
 	  List<WebElement> links = driver.findElements(By.tagName("a"));
 	  for(WebElement link:links) {
@@ -28,6 +31,9 @@ public class NewTest {
 			  huc.setRequestMethod("HEAD");
 			  huc.connect();
 			  int responsecode = huc.getResponseCode();
+			  if(responsecode<=400){
+				  System.out.println("It is a ");
+			  }
 		  }
 	  }
 	  
