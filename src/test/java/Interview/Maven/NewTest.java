@@ -51,10 +51,13 @@ public class NewTest {
       }else {
     	  System.out.println("Page is not loaded");
       }
-      
+
+
       WebElement element = driver.findElement(By.xpath("//div[@class=\"navFooterColHead\"]"));
       WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
       wait.until(ExpectedConditions.visibilityOf(element));
+
+	  driver.findElement(By.xpath("//*[text()='Mobiles']")).click();
       
       /*js.executeScript("arguments[0].style.backgroundColor='red';",element);
       Thread.sleep(5000);*/
@@ -63,18 +66,34 @@ public class NewTest {
       /*js.executeScript("arguments[0].scrollIntoView({block: 'center', inline: 'center'});",element);
       Thread.sleep(4000);*/
       
-      js.executeScript("window.scrollTo(0,500);");
+      //js.executeScript("window.scrollTo(0,500);");
 	  
-	  List<WebElement> cards = driver.findElements(By.xpath("//*[contains(@id,'desktop-grid-')]"));
+	 // List<WebElement> cards = driver.findElements(By.xpath("//*[contains(@id,'desktop-grid-')]"));
+
+	  WebElement elem = driver.findElement(By.xpath("(//*[contains(text(),'Mobiles &')])[3]"));
+
+	  Actions act = new Actions(driver);
+	  act.moveToElement(elem).perform();
+
+	  WebElement menu = driver.findElement(By.xpath("//*[@class=\"mega-menu\"]"));
+
+
 	  
-	  for(WebElement item:cards) {
-		  String data = item.getText();
-		  System.out.println(data);
+ 	  //System.out.println("The size of the link is "+links.size());
+	  for(int i=1;i<=5;i++){
+		  WebElement ele = driver.findElement(By.xpath("(//*[@class=\"mm-column\"])["+i+"]"));
+		  List<WebElement> links = ele.findElements(By.tagName("a"));
+		  for(WebElement item:links){
+			  String url = item.getAttribute("href");
+			  String text = item.getText();
+			  System.out.println("The url under the "+i+" is: "+text+url);
+		  }
+
+
 	  }
-	  
-	  List<WebElement> links = driver.findElements(By.tagName("a"));
-	  System.out.println("The size of the link is "+links.size());
-	  for(WebElement item:links) {
+
+
+	 /* for(WebElement item:links) {
 		  String url = item.getAttribute("href");
 		  if(url != null && !url.isEmpty()) {
 			  try {
@@ -96,10 +115,10 @@ public class NewTest {
 
 		  }
 		  
-	  }
+	  }*/
 	  
-	  Actions act1 = new Actions(driver);
-	  act1.dragAndDrop(element, element);
+	 /* Actions act1 = new Actions(driver);
+	  act1.dragAndDrop(element, element);*/
 	  
 	 /* String url = "";
 	  HttpsURLConnection huc = (HttpsURLConnection) (new URL(url).openConnection());

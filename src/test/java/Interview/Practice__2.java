@@ -30,15 +30,14 @@ import org.apache.xmlbeans.impl.xb.xsdschema.Facet;
 public class Practice__2 
 {
 	public static void main() {
-		String str= "Hello World!";
-		char c='o';
-		int count=0;
-	      for(char item:str.toCharArray()) {
-	    	  if(item=='o') {
-	    		  count++;
-	    	  }
-	      }
-	    System.out.println(count);
+		String name = "ajayautomation";
+		String new_str = "";
+		int leng = name.length()-1;
+		for(int i=leng;i>=0;i--){
+			new_str += name.charAt(i);
+		}
+		System.out.println(new_str);
+
 
 
 

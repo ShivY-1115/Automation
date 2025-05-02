@@ -20,6 +20,10 @@ public class API_Testing_PUT {
 	  System.out.println(res.getStatusCode());
 	  System.out.println(res.getBody());
 
+      long time1 = res.getTime();
+      System.out.println(time1);
+
+
       given().when().get("https://reqres.in/api/users?delay=3").then().time(lessThan(2000L));
 
 
