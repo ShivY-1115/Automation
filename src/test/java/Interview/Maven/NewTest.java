@@ -80,7 +80,8 @@ public class NewTest {
 
 	  
  	  //System.out.println("The size of the link is "+links.size());
-	  for(int i=1;i<=5;i++){
+	  for(int i=1;i<=5;i++)
+	  {
 		  WebElement ele = driver.findElement(By.xpath("(//*[@class=\"mm-column\"])["+i+"]"));
 		  List<WebElement> links = ele.findElements(By.tagName("a"));
 		  for(WebElement item:links){
@@ -88,8 +89,6 @@ public class NewTest {
 			  String text = item.getText();
 			  System.out.println("The url under the "+i+" is: "+text+url);
 		  }
-
-
 	  }
 
 

@@ -22,9 +22,9 @@ public class Table {
 	  driver.findElement(By.xpath("//*[text()='Same day delivery']")).click();
 	  
 	  Thread.sleep(3000);
-	  WebElement element = driver.findElement(By.xpath("//*[text()='Top Same Day Delivery Products on Kapruka']"));
+	  WebElement element1 = driver.findElement(By.xpath("//*[text()='Top Same Day Delivery Products on Kapruka']"));
 	  JavascriptExecutor js = (JavascriptExecutor) driver;
-	  js.executeScript("arguments[0].scrollIntoView(true);", element);
+	  js.executeScript("arguments[0].scrollIntoView(true);", element1);
 	  Thread.sleep(3000);
 
 	  List<WebElement> count = driver.findElements(By.xpath("//tr"));

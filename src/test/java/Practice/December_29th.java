@@ -39,8 +39,8 @@ public class December_29th {
 	  WebElement element = driver.findElement(By.xpath("//input[@id=\"twotabsearchtextbox\"]"));
 	  element.sendKeys("Galaxy S24 Ultra");
 	  element.sendKeys(Keys.ENTER);
-	  List<WebElement> names = driver.findElements(By.xpath("//div[@data-cy=\"title-recipe\"]/child::a/descendant::span"));
-	  for(WebElement item:names) {
+	  List<WebElement> names1 = driver.findElements(By.xpath("//div[@data-cy=\"title-recipe\"]/child::a/descendant::span"));
+	  for(WebElement item:names1) {
 		  String text = item.getText();
 		  System.out.println(text);
 	  }
