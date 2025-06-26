@@ -22,5 +22,6 @@ class Linkedlist_problems{
 
 
         }
+        return prev;
     }
 }
