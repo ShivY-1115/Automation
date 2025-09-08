@@ -35,14 +35,22 @@ public class NewTest {
 		
 		  options.addArguments("--disable-notifications");
 		  options.addArguments("incognito");
-		 System.setProperty("webdriver.chrome.driver", "C:\\Users\\Srikar\\eclipse-workspace\\Maven\\src\\test\\resources\\chromedriver.exe");
+		// System.setProperty("webdriver.chrome.driver", "C:\\Users\\Srikar\\eclipse-workspace\\Maven\\src\\test\\resources\\chromedriver.exe");
 	  
 	   driver = new ChromeDriver(options);
 	  driver.get("https://www.amazon.in/");
-	  driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(60));
-	  driver.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
+	  driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(20));
+	  //driver.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
 	  driver.manage().window().maximize();
 	  driver.manage().deleteAllCookies();
+
+	  try{
+		  driver.findElement(By.xpath("//*[text()='Continue shopping']")).click();
+
+	  } catch (Exception e) {
+
+	  }
+
       Thread.sleep(5000);
       JavascriptExecutor js = (JavascriptExecutor) driver;
       String state = (String) js.executeScript("return document.readyState");
