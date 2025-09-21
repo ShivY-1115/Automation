@@ -5,6 +5,7 @@ import io.restassured.*;
 import io.restassured.response.Response;
 
 import static io.restassured.RestAssured.given;
+import static org.hamcrest.Matchers.*;
 
 public class API_Practice {
 
@@ -34,6 +35,17 @@ public class API_Practice {
 
     public void OAuth2(){
         Response resp = given().auth().oauth2("").when().get();
+    }
+
+    public void Bearer_token(){
+        RestAssured.given().header("Authorization","Bearer ***************").when().get().then().assertThat().
+                statusCode(200);
+
+        RestAssured.given().header("Authorization","Bearer ***************").when().get().then().
+                statusCode(200);
+
+
+
     }
 
 }

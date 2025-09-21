@@ -29,19 +29,15 @@ import org.apache.xmlbeans.impl.xb.xsdschema.Facet;
 
 public class Practice__2 
 {
-	public static void main() {
-		String name = "ajayautomation";
-		String new_str = "";
-		int leng = name.length()-1;
-		for(int i=leng;i>=0;i--){
-			new_str += name.charAt(i);
-		}
-		System.out.println(new_str);
-
-
-
-
-		 
+	public static void main()
+	{
+		Integer[] arr = {11111,2222,399,40,6,6,6,6};
+		Integer[] new_Arr = arr.clone();
+		Arrays.sort(new_Arr,Collections.reverseOrder());
+		System.out.println(Arrays.equals(arr,new_Arr));
+		int num = Collections.frequency(Arrays.asList(arr),6);
+		System.out.println(num);
+		//Arrays.equals()
 	}
 	
 	public static void main(String[] args) {
@@ -61,10 +57,9 @@ public class Practice__2
 			System.out.println(item);
 		}
 			          
-	}  
-	
-	
-	
+	}
+
+
 	/*
 	 * public static void uploadfile() throws AWTException {
 	 * stringselection("C://downloads//example.com"); Robot robo = new Robot();

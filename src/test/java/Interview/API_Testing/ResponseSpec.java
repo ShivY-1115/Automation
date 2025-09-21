@@ -12,7 +12,5 @@ public class ResponseSpec {
         ResponseSpecification resspec = (ResponseSpecification) new ResponseSpecBuilder().expectContentType("Application/json")
                 .expectStatusCode(200).expectBody("ststud",equalTo("mawa"));
 
-
-
     }
 }
