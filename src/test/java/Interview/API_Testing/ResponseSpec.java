@@ -9,8 +9,11 @@ public class ResponseSpec {
 
     public static void main(String[] args) {
 
-        ResponseSpecification resspec = (ResponseSpecification) new ResponseSpecBuilder().expectContentType("Application/json")
-                .expectStatusCode(200).expectBody("ststud",equalTo("mawa"));
-
+        ResponseSpecification resSpec = (ResponseSpecification) new ResponseSpecBuilder().
+                expectBody("name",equalTo("vamsi")).
+                expectContentType("application/json").
+                expectStatusCode(200);
     }
+
+
 }
