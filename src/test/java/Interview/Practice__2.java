@@ -6,20 +6,10 @@ import java.awt.Toolkit;
 import java.awt.datatransfer.StringSelection;
 import java.awt.event.KeyEvent;
 import java.io.File;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Iterator;
-import java.util.LinkedHashMap;
-import java.util.LinkedHashSet;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.*;
 import java.util.Map.Entry;
-import java.util.Random;
-import java.util.Scanner;
 
 import org.apache.xmlbeans.impl.xb.xsdschema.Facet;
 
@@ -31,12 +21,11 @@ public class Practice__2
 {
 	public static void main()
 	{
-		Integer[] arr = {11111,2222,399,40,6,6,6,6};
-		Integer[] new_Arr = arr.clone();
-		Arrays.sort(new_Arr,Collections.reverseOrder());
-		System.out.println(Arrays.equals(arr,new_Arr));
-		int num = Collections.frequency(Arrays.asList(arr),6);
-		System.out.println(num);
+		LocalDate date = LocalDate.now();
+
+		String month = date.format(DateTimeFormatter.ofPattern("MMMM"));   //September
+
+
 		//Arrays.equals()
 	}
 	
