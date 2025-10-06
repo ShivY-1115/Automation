@@ -1,6 +1,7 @@
 package Interview.Java;
 
 import java.time.LocalDate;
+import java.time.Month;
 import java.time.format.DateTimeFormatter;
 
 public class DateFormatter {
@@ -17,5 +18,15 @@ public class DateFormatter {
         String prev_month = date.minusMonths(1).format(DateTimeFormatter.ofPattern("MMM"));
 
         System.out.println(month+" "+year+" "+weekday+" "+prev_month);
+
+        String dateStr = "23-09-2025";
+
+        LocalDate Date = LocalDate.parse(dateStr,DateTimeFormatter.ofPattern("dd-MM-yyyy"));
+
+        System.out.println(Date.getMonth());
+
+       System.out.println( Date.getEra());
+
+
     }
 }

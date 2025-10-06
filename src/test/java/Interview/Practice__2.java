@@ -25,6 +25,13 @@ public class Practice__2
 
 		String month = date.format(DateTimeFormatter.ofPattern("MMMM"));   //September
 
+		ArrayList<Integer> list = new ArrayList<>();
+		System.out.println(list.size());
+
+		Collections.reverse(list);
+
+
+
 
 		//Arrays.equals()
 	}
