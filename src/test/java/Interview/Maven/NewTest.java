@@ -11,6 +11,9 @@ import java.util.concurrent.TimeUnit;
 
 import javax.net.ssl.HttpsURLConnection;
 
+import Reports.ExtentManager;
+import com.aventstack.extentreports.ExtentReports;
+import com.aventstack.extentreports.ExtentTest;
 import org.apache.commons.logging.Log;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
@@ -22,15 +25,21 @@ import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.locators.RelativeLocator;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.annotations.AfterSuite;
+import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.Test;
 
 
 public class NewTest {
-	
+
+	public ExtentReports extent;
+	public ExtentTest test;
+
+
 	public WebDriver driver;
   @Test
   public void f() throws MalformedURLException, IOException, InterruptedException {
-	  
+	  test = extent.createTest("Login Test");
 	  ChromeOptions options = new ChromeOptions();
 		
 		  options.addArguments("--disable-notifications");
@@ -39,8 +48,8 @@ public class NewTest {
 	  
 	   driver = new ChromeDriver(options);
 	  driver.get("https://www.amazon.in/");
-	  driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(60));
-	  driver.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
+	  driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(20));
+	 // driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
 	  driver.manage().window().maximize();
 	  driver.manage().deleteAllCookies();
 	  try{
@@ -95,6 +104,11 @@ public class NewTest {
 			  System.out.println("The url under the "+i+" is: "+text+url);
 		  }
 	  }
+
+	  Thread.sleep(2000);
+
+	  test.pass("Login successful");
+
 
 
 	 /* for(WebElement item:links) {
@@ -151,4 +165,18 @@ public class NewTest {
   
   
   }
+
+	@BeforeSuite
+	public void setupReport() {
+		extent = ExtentManager.getInstance();
+	}
+
+	@AfterSuite
+	public void flushReport() {
+		extent.flush(); // VERY IMPORTANT
+	}
+
+
+
+
 }
