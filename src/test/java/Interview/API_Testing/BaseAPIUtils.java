@@ -17,7 +17,8 @@ public class BaseAPIUtils  {
 
     }
 
-    public static Response get(String endpoint, int res){
+    public static Response get(String endpoint, int res)
+    {
         return RestAssured.given().when().spec(requestSpec).
                 get(endpoint).
                 then().
