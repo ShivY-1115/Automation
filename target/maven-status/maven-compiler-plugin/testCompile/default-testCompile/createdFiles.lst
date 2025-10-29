@@ -1,3 +1,4 @@
+Interview\Maven\Wait_till_Download.class
 Interview\Maven\Factory.class
 Interview\Maven\Excel$1.class
 Interview\Maven\TestNgTestBase.class
@@ -8,6 +9,7 @@ Interview\Maven\Excel.class
 Interview\Maven\SuiteConfiguration.class
 Interview\Maven\Table.class
 Practice\Excel.class
+Interview\Algorithms\Kadane_Algorithm.class
 Interview\API_Testing\RequestSpec.class
 Interview\ListNode.class
 Interview\Streams.class
@@ -20,6 +22,7 @@ Interview\Maven\December_29th.class
 Interview\API_Testing\API_Testing_get.class
 Interview\API_Testing\ResponseSpec.class
 Interview\API_Testing\API_Testing.class
+Interview\API_Testing\form_param.class
 Interview\Practice__2.class
 Interview\Maven\BrowserTest.class
 Interview\Maven\pages\hellowolrd.class
@@ -28,6 +31,7 @@ Interview\Java\DateFormatter.class
 Practice\Hello.class
 Interview\Algorithms\String_without_Special_chars.class
 Interview\Algorithms\printing_number_without_loop.class
+Interview\API_Testing\wiremock.class
 Interview\Practice_New.class
 Interview\NewTest.class
 Practice\Calendar.class
@@ -40,6 +44,7 @@ Interview\Maven\RetryAnalyser.class
 Practice\December_29th.class
 Interview\API_Testing\API_Testing_PUT.class
 Interview\Linked_List.class
+Interview\API_Testing\Validating_NestedJson.class
 Interview\Practice_.class
 Interview\Maven\pages\Page.class
 Interview\API_Testing\API_Testing_Options.class
