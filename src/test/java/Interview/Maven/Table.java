@@ -11,6 +11,8 @@ import org.openqa.selenium.chrome.ChromeOptions;
 import org.testng.annotations.Test;
 
 public class Table {
+
+	  public static WebDriver driver;
   @Test
   public void f() throws InterruptedException {
 	  ChromeOptions options = new ChromeOptions();
@@ -18,25 +20,47 @@ public class Table {
 	  //options.addArguments("incognito");
 	  
 	  WebDriver driver = new ChromeDriver(options);
-	  driver.get("https://www.kapruka.com/online/samedaydelivery");
-	  driver.findElement(By.xpath("//*[text()='Same day delivery']")).click();
-	  
-	  Thread.sleep(3000);
-	  WebElement element1 = driver.findElement(By.xpath("//*[text()='Top Same Day Delivery Products on Kapruka']"));
 	  JavascriptExecutor js = (JavascriptExecutor) driver;
-	  js.executeScript("arguments[0].scrollIntoView(true);", element1);
+
+	  driver.get("https://www.kapruka.com/online/samedaydelivery");
+
+	  waitForPageLoadWithRetries(driver, 3, 2000);
+
+	  WebElement element = driver.findElement(By.xpath("//*[text()='Top Same Day Delivery Products on Kapruka']"));
+	  js.executeScript("arguments[0].scrollIntoView(true);", element);
+
 	  Thread.sleep(3000);
 
-	  List<WebElement> count = driver.findElements(By.xpath("//tr"));
-	  System.out.println(count.size());
-	  int countq1 = count.size();
-	  for(int i=1;i<=countq1;i++) {
-		  String text1 = driver.findElement(By.xpath("//tr["+i+"]")).getText();
-		  System.out.println(text1);
+
+	  List<WebElement> rows = driver.findElements(By.xpath("//tr"));
+	  System.out.println(rows.size());
+	  for(WebElement row: rows){
+		  List<WebElement> valus = row.findElements(By.tagName("td"));
+		  for(WebElement item: valus){
+			  System.out.print(item.getText() + " | ");
+		  }
+		  System.out.println();
+
 	  }
-	  
  
 	  
 	  
   }
+
+	// java
+	public static boolean waitForPageLoadWithRetries(WebDriver driver, int maxRetries, long pauseMillis) throws InterruptedException {
+		if (driver == null) return false;
+		JavascriptExecutor js = (JavascriptExecutor) driver;
+		int attempts = 0;
+		while (attempts < maxRetries) {
+			Object state = js.executeScript("return document.readyState");
+			if ("complete".equals(state)) {
+				return true;
+			}
+			attempts++;
+			Thread.sleep(pauseMillis);
+		}
+		return false;
+	}
+
 }

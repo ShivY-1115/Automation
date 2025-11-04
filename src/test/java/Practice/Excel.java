@@ -17,7 +17,8 @@ import org.testng.annotations.Test;
 
 public class Excel {
   @Test
-  public void f() throws IOException {
+  public void f() throws IOException
+  {
 	  
 	  File fis = new File("C:/Users/Srikar/OneDrive/Documents/Assignments/TestData.xlsx");
 	  FileInputStream file = new FileInputStream(fis);
@@ -83,7 +84,8 @@ public class Excel {
 		  }
 	  }
 	  
-	  if (columndata.contains("name")){
+	  if (columndata.contains("name"))
+	  {
 		  int index = columndata.indexOf("name");
 		  String value = sheet.getRow(index).getCell(1).getStringCellValue();
 		  Row row23 = sheet.getRow(2);
