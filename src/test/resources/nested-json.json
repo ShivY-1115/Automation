@@ -1,0 +1,54 @@
+{
+  "id": 101,
+  "name": "Jon Snow",
+  "email": "Jon.snow@example.com",
+  "isActive": true,
+  "roles": ["USER", "ADMIN"],
+  "address": {
+    "street": "12-34, Park Avenue",
+    "city": "Hyderabad",
+    "state": "Telangana",
+    "zipcode": "500032",
+    "geo": {
+      "lat": 17.385044,
+      "lng": 78.486671
+    }
+  },
+  "orders": [
+    {
+      "id": 501,
+      "item": "Macbook Pro",
+      "price": 180000.50,
+      "quantity": 1,
+      "paymentStatus": "PAID",
+      "delivery": {
+        "expectedDate": "2025-01-10",
+        "isDelivered": false
+      }
+    },
+    {
+      "id": 502,
+      "item": "iPhone 16 Pro",
+      "price": 150000.00,
+      "quantity": 1,
+      "paymentStatus": "PENDING",
+      "delivery": {
+        "expectedDate": "2025-01-15",
+        "isDelivered": false
+      }
+    }
+  ],
+  "preferences": {
+    "newsletter": true,
+    "notifications": {
+      "email": true,
+      "sms": false,
+      "push": true
+    }
+  },
+  "metadata": {
+    "createdAt": "2024-11-01T12:00:00Z",
+    "lastUpdated": "2024-12-01T15:45:30Z",
+    "loginCount": 42
+  }
+}
