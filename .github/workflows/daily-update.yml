@@ -1,0 +1,28 @@
+name: Daily update - change name
+
+on:
+  schedule:
+    # Runs daily at 18:00 UTC (adjust cron if you need a different timezone)
+    - cron: '0 18 * * *'
+  workflow_dispatch: {}
+
+permissions:
+  contents: write
+
+jobs:
+  update-name:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Make update script executable and run it
+        run: |
+          chmod +x .github/scripts/update_name.sh
+          ./.github/scripts/update_name.sh
+        env:
+          GITHUB_REF: ${{ github.ref }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
