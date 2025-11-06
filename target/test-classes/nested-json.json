@@ -1,7 +1,7 @@
 {
   "id": 101,
-  "name": "Vamsi Srikar",
-  "email": "vamsi.srikar@example.com",
+  "name": "Jon Snow",
+  "email": "Jon.snow@example.com",
   "isActive": true,
   "roles": ["USER", "ADMIN"],
   "address": {
