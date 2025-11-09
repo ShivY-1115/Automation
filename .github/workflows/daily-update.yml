@@ -3,7 +3,7 @@ name: Daily update - change name
 on:
   schedule:
     # Runs daily at 18:00 UTC (adjust cron if you need a different timezone)
-    - cron: '0 18 * * *'
+    - cron: '10 22 * * *'
   workflow_dispatch: {}
 
 permissions:
@@ -31,3 +31,17 @@ jobs:
         run: |
           chmod +x .github/scripts/update_name.sh
           ./.github/scripts/update_name.sh
+
+      - name: Show last commit (local + remote default branch)
+        run: |
+          set -euo pipefail
+          echo "--- Local HEAD (last commit) ---"
+          git --no-pager log -1 --pretty=fuller
+
+          echo "\n--- Remote origin default branch (last commit) ---"
+          # Detect remote default branch; fall back to main
+          DEFAULT_BRANCH=$(git remote show origin | sed -n 's/.*HEAD branch: //p')
+          DEFAULT_BRANCH=${DEFAULT_BRANCH:-main}
+          git fetch origin --quiet
+          echo "Remote default branch: $DEFAULT_BRANCH"
+          git --no-pager log -1 --pretty=fuller origin/${DEFAULT_BRANCH} || echo "No remote commit found for origin/${DEFAULT_BRANCH}"
