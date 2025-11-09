@@ -16,6 +16,9 @@ public class RetryAnalyser implements IRetryAnalyzer {
             count++;
             return true;
         }
+        int a = 0;
+        int b = 1;
+        Math.abs(a-b);
 
         return false;
     }
