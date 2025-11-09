@@ -28,16 +28,32 @@ awk -v name="$RANDOM_NAME" '{
   print
 }' "$FILE" > "$FILE.tmp" && mv "$FILE.tmp" "$FILE"
 
-# Configure git
-git config user.name "github-actions[bot]"
-git config user.email "github-actions[bot]@users.noreply.github.com"
-
-# Commit and push
 cd "$REPO_ROOT"
-# Commit message in the format: Commit on YYYY-MM-DD
-COMMIT_MSG="Commit on $(date -u +%Y-%m-%d)"
-if git add -A && git commit -m "$COMMIT_MSG"; then
-  git push origin HEAD:main || git push origin HEAD:master || echo "Push failed - check branch name"
+
+# Ensure we have commit author info from environment (set these in the workflow as secrets)
+# GIT_COMMIT_NAME and GIT_COMMIT_EMAIL should be provided by the workflow; fall back to github-actions[bot] if not set.
+GIT_AUTHOR_NAME="${GIT_COMMIT_NAME:-github-actions[bot]}"
+GIT_AUTHOR_EMAIL="${GIT_COMMIT_EMAIL:-github-actions[bot]@users.noreply.github.com}"
+
+# Only proceed if there are changes
+if [ -n "$(git status --porcelain)" ]; then
+  # Determine default branch name of the remote (origin)
+  DEFAULT_BRANCH=$(git remote show origin | sed -n 's/.*HEAD branch: //p')
+  DEFAULT_BRANCH=${DEFAULT_BRANCH:-main}
+
+  # Commit message in the format: Commit on YYYY-MM-DD (UTC)
+  COMMIT_MSG="Commit on $(date -u +%Y-%m-%d)"
+
+  # Use UTC timestamps for author and committer dates so contributions line up correctly
+  export GIT_AUTHOR_DATE="$(date -u +%Y-%m-%dT%H:%M:%SZ)"
+  export GIT_COMMITTER_DATE="$(date -u +%Y-%m-%dT%H:%M:%SZ)"
+
+  # Stage, commit with explicit author, and push to the default branch
+  git add -A
+  git commit -m "$COMMIT_MSG" --author="$GIT_AUTHOR_NAME <$GIT_AUTHOR_EMAIL>"
+
+  # Push to the detected default branch
+  git push origin HEAD:"$DEFAULT_BRANCH"
 else
   echo "No changes to commit"
 fi

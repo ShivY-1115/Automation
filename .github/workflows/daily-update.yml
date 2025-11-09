@@ -13,16 +13,21 @@ jobs:
   update-name:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout repository
+      - name: Checkout repository (use PAT for push)
         uses: actions/checkout@v4
         with:
-          token: ${{ secrets.GITHUB_TOKEN }}
+          # Provide a personal access token in repository secrets named PERSONAL_ACCESS_TOKEN
+          token: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
+          persist-credentials: true
 
       - name: Make update script executable and run it
+        env:
+          # Set these repository secrets before running the workflow:
+          # PERSONAL_ACCESS_TOKEN : a PAT with repo scope (used above in checkout)
+          # COMMIT_NAME : Your GitHub display/name (e.g., "Srikar")
+          # COMMIT_EMAIL: Your verified GitHub email or the GitHub noreply email (e.g., 123456+username@users.noreply.github.com)
+          GIT_COMMIT_NAME: ${{ secrets.COMMIT_NAME }}
+          GIT_COMMIT_EMAIL: ${{ secrets.COMMIT_EMAIL }}
         run: |
           chmod +x .github/scripts/update_name.sh
           ./.github/scripts/update_name.sh
-        env:
-          GITHUB_REF: ${{ github.ref }}
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
