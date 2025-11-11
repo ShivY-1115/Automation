@@ -14,7 +14,8 @@ public class Table {
 
 	  public static WebDriver driver;
   @Test
-  public void f() throws InterruptedException {
+  public void f() throws InterruptedException
+  {
 	  ChromeOptions options = new ChromeOptions();
 	  options.addArguments("--disable-notifications");
 	  //options.addArguments("incognito");
