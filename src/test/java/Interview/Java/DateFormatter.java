@@ -1,5 +1,7 @@
 package Interview.Java;
 
+import net.bytebuddy.asm.Advice;
+
 import java.time.LocalDate;
 import java.time.Month;
 import java.time.format.DateTimeFormatter;
@@ -26,6 +28,11 @@ public class DateFormatter {
         System.out.println(Date.getMonth());
 
        System.out.println( Date.getEra());
+
+
+        LocalDate dat = LocalDate.parse(dateStr,DateTimeFormatter.ofPattern("dd-MM-yyyy"));
+
+        dat.getDayOfMonth();
 
 
     }

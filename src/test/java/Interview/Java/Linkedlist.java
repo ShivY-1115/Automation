@@ -1,12 +1,9 @@
 package Interview.Java;
+import java.util.Iterator;
 import java.util.LinkedList;
 
 
 public class Linkedlist {
-
-
-
-
 
     public static void main(String[] args) {
             // *****************************************************
@@ -65,8 +62,15 @@ public class Linkedlist {
 
             System.out.println(linkedList);
 
+        Iterator<String> iterator = linkedList.iterator();
+        while(iterator.hasNext()){
+           // System.out.println(iterator.next());
+            linkedList.remove(iterator.next());
         }
 
+        // print size after removals (inside main)
+        System.out.println(linkedList.size());
+
+    }
+
 }
-
-

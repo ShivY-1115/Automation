@@ -19,8 +19,8 @@ import org.testng.annotations.Test;
 public class NewTest {
 	
 	public static WebDriver driver;
-	 
-  @Test
+
+  @Test()
   public void f() throws IOException, AWTException {
 	  
 	  List<WebElement> links = driver.findElements(By.tagName("a"));
@@ -49,4 +49,10 @@ public class NewTest {
 	  
    
   }
+
+  @Test(dependsOnMethods = "f")
+	  public void g() {
+
+  }
+
 }
