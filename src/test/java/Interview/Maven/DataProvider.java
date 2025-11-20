@@ -7,9 +7,9 @@ public class DataProvider {
     @org.testng.annotations.DataProvider(name = "USERS")
     public static Object[][] data(){
         return new Object[][]{
-                {"Vamsi","Srikar"},
-                {"Srikar","Jogi"},
-                {"Jogi","Vamsi"}
+                {"John","Snow"},
+                {"Aegon","Targeryon"},
+                {"White","Wolf"}
         };
     }
 

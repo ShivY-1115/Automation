@@ -3,7 +3,7 @@ name: Daily update - change name
 on:
   schedule:
     # Runs daily at 18:00 UTC (adjust cron if you need a different timezone)
-    - cron: '10 22 * * *'
+    - cron: '0 18 * * *'
   workflow_dispatch: {}
 
 permissions:

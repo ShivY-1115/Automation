@@ -19,21 +19,28 @@ FN=${FIRST[$RANDOM % ${#FIRST[@]}]}
 LN=${LAST[$RANDOM % ${#LAST[@]}]}
 RANDOM_NAME="$FN $LN"
 
-# Use awk to replace the line that sets the name in the map (line containing map.put("name", ... ); )
-awk -v name="$RANDOM_NAME" '{
-  if ($0 ~ /map\.put\("name"/) {
-    # replace the entire map.put("name","<anything>"); expression with the new name
-    sub(/map\.put\(\"name\",\"[^\"]*\"\);/, "map.put(\"name\",\"" name "\");")
-  }
-  print
-}' "$FILE" > "$FILE.tmp" && mv "$FILE.tmp" "$FILE"
+# Resolve commit author/email from environment; fall back to GITHUB_ACTOR and sensible defaults.
+# For contributions to count for your account, set GIT_COMMIT_NAME and GIT_COMMIT_EMAIL in the workflow
+# to match your GitHub account name and a verified email on your account.
+GIT_AUTHOR_NAME="${GIT_COMMIT_NAME:-${GITHUB_ACTOR:-github-actions[bot]}}"
+GIT_AUTHOR_EMAIL="${GIT_COMMIT_EMAIL:-${GITHUB_ACTOR:-github-actions[bot]}@users.noreply.github.com}"
+
+# Ensure git has a committer identity (prevents "Please tell me who you are" failures)
+# Configure locally (no --global) so we don't affect the runner environment.
+git config user.name "$GIT_AUTHOR_NAME"
+git config user.email "$GIT_AUTHOR_EMAIL"
+
+# Export author/committer env vars so git uses them non-interactively
+export GIT_AUTHOR_NAME
+export GIT_AUTHOR_EMAIL
+export GIT_COMMITTER_NAME="$GIT_AUTHOR_NAME"
+export GIT_COMMITTER_EMAIL="$GIT_AUTHOR_EMAIL"
+
+# Use perl to perform an in-place (safe) replacement of the map.put("name", "..."); line.
+# This avoids awk regexp escape warnings and is robust against different whitespace.
+perl -0777 -pe 's/map\.put\(\s*"name"\s*,\s*"[^"]*"\s*\);/map.put("name","'"$RANDOM_NAME"'"\);/gs' "$FILE" > "$FILE.tmp" && mv "$FILE.tmp" "$FILE"
 
 cd "$REPO_ROOT"
-
-# Ensure we have commit author info from environment (set these in the workflow as secrets)
-# GIT_COMMIT_NAME and GIT_COMMIT_EMAIL should be provided by the workflow; fall back to github-actions[bot] if not set.
-GIT_AUTHOR_NAME="${GIT_COMMIT_NAME:-github-actions[bot]}"
-GIT_AUTHOR_EMAIL="${GIT_COMMIT_EMAIL:-github-actions[bot]@users.noreply.github.com}"
 
 # Only proceed if there are changes
 if [ -n "$(git status --porcelain)" ]; then
@@ -45,8 +52,10 @@ if [ -n "$(git status --porcelain)" ]; then
   COMMIT_MSG="Commit on $(date -u +%Y-%m-%d)"
 
   # Use UTC timestamps for author and committer dates so contributions line up correctly
-  export GIT_AUTHOR_DATE="$(date -u +%Y-%m-%dT%H:%M:%SZ)"
-  export GIT_COMMITTER_DATE="$(date -u +%Y-%m-%dT%H:%M:%SZ)"
+  GIT_AUTHOR_DATE="$(date -u +%Y-%m-%dT%H:%M:%SZ)"
+  GIT_COMMITTER_DATE="$(date -u +%Y-%m-%dT%H:%M:%SZ)"
+  export GIT_AUTHOR_DATE
+  export GIT_COMMITTER_DATE
 
   # Stage, commit with explicit author, and push to the default branch
   git add -A
