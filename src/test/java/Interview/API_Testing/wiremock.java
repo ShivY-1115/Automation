@@ -20,7 +20,7 @@ public class wiremock {
     public static void main(String[] args) throws JsonProcessingException {
 
         HashMap<String,String> map = new HashMap<>();
-        map.put("name","Taylor Lee");
+        map.put("name","Taylor Allen");
         map.put("id","1");
 
         ObjectMapper objectMapper = new ObjectMapper();
