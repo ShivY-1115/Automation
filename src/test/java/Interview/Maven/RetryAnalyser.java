@@ -5,8 +5,8 @@ import org.testng.ITestResult;
 
 public class RetryAnalyser implements IRetryAnalyzer {
 
-    int count = 0;
-    int max_count = 3;
+    private int count = 0;
+    private int max_count = 3;
 
 
     @Override
@@ -16,9 +16,7 @@ public class RetryAnalyser implements IRetryAnalyzer {
             count++;
             return true;
         }
-        int a = 0;
-        int b = 1;
-        Math.abs(a-b);
+
 
         return false;
     }
